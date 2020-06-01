@@ -12,7 +12,7 @@ mv composer.phar /usr/bin/composer
 
 #install nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-sleep 10
+sleep 3
 . ~/.nvm/nvm.sh
 nvm install node
 node -e "console.log('Running Node.js ' + process.version)"
@@ -25,16 +25,10 @@ sh /root/conf/gitclone.sh
 #install laravel module
 dir=$(ls)
 cd $dir
-composer install 
-npm install 
+composer install
+npm install
 mkdir public public/images/ storage/ storage/app storage/debugbar storage/framework storage/logs storage/framework/sessions storage/framework/views storage/framework/cache
 mv /root/conf/index.php public/
-
-#setup permission
-chown -R nginx:nginx storage/
-chmod -R 755 storage/
-chown -R nginx:nginx  public/
-chmod -R 755 public/
 
 #setup .env
 
@@ -43,5 +37,12 @@ chmod -R 755 public/
 
 
 #setup package
+npm run dev
 npm run prod 
 npm run  css
+
+#setup permission
+chown -R nginx:nginx storage/
+chmod -R 755 storage/
+chown -R nginx:nginx public/
+chmod -R 755 public/

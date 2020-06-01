@@ -40,13 +40,13 @@ amazon-linux-extras install -y nginx1.12
 yum install -y php-pecl-mcrypt
 sed -i 's/enabled=0/enable=1/g' /etc/yum.repos.d/epel.repo
 sed -i 's/enabled=0/enable=1/g' /etc/yum.repos.d/amzn2-core.repo
+rm -f /etc/nginx/conf.d/php-fpm.conf
+rm -f /etc/nginx/default.d/php.conf
 
 #install mysql-client
 yum install -y mysql
 
 #set timezone
-#systemctl start ntpd
 systemctl enable ntpd
 timedatectl set-timezone Asia/Taipei
-#ntpdate time.stdtime.gov.tw
 systemctl restart network

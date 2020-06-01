@@ -9,6 +9,7 @@ echo 1.$p1
 echo 2.$p2
 echo 3.$p3
 echo 4.$p4
+echo 5.$p5
 
 printf "Please type a number:"
 read input
