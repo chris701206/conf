@@ -10,6 +10,7 @@ echo 2.$p2
 echo 3.$p3
 echo 4.$p4
 echo 5.$p5
+echo Ctrl + c to stop shell
 
 printf "Please type a number:"
 read input
@@ -20,6 +21,5 @@ case $input in
 3) git clone $p3;;
 4) git clone $p4;;
 5) git clone $p5;;
-
 *) printf "Error : incorrect input \n";;
 esac

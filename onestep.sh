@@ -1,4 +1,12 @@
-#! /bin/bash
+#!/bin/bash
+#=============================================
+
+#This onestep.sh shell function is mainly to automatically install packages and configuration files
+
+#=============================================
+
+
+
 yum install -y epel-release net-tools settools wget ntp libxml2-devel libtool re2c gcc-c++ gcc git net-tools zip unzip ntsysv tmux yum-utils
 amazon-linux-extras  install -y epel
 yum update -y
