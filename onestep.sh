@@ -4,9 +4,14 @@
 #This onestep.sh shell function is mainly to automatically install packages and configuration files
 
 #=============================================
+#setting log
+sed  -i '/Subsystem/d' /etc/ssh/sshd_config
+sed -i '131a\Subsystem   sftp  /usr/libexec/openssh/sftp-server -l INFO -f AUTH'  /etc/ssh/sshd_config
+sed -i '74a/auth.*  /var/log/sftp.log/' /etc/rsyslog.conf
+systemctl restart  sshd
+systemctl restart rsyslog
 
-
-
+#install package
 yum install -y epel-release net-tools settools wget ntp libxml2-devel libtool re2c gcc-c++ gcc git net-tools zip unzip ntsysv tmux yum-utils
 amazon-linux-extras  install -y epel
 yum update -y
@@ -85,37 +90,44 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/bin/composer
 
+#option select fn or bn
+echo please input fn or bn to execute process : 
+read INPUT
+case $INPUT in
+fn) sh fn.sh;;
+bn) sh bn.sh;;
+e)  echo bye bye && exit;;
+esac
+
+
 #install nodejs
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-wait
-. ~/.nvm/nvm.sh
-nvm install node
-node -e "console.log('Running Node.js ' + process.version)"
+#curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+#wait
+#. ~/.nvm/nvm.sh
+#nvm install node
+#node -e "console.log('Running Node.js ' + process.version)"
 
 #git clone project
-mkdir /var/www/html/
-cd /var/www/html/
-sh /root/conf/gitclone.sh
+#mkdir /var/www/html/
+#cd /var/www/html/
+#sh /root/conf/gitclone.sh
 
 #install laravel module
-dir=$(ls)
-cd $dir
-composer install
-npm install
-mkdir public public/images/ storage/ storage/app storage/debugbar storage/framework storage/logs storage/framework/sessions storage/framework/views storage/framework/cache
-mv /root/conf/index.php public/
+#dir=$(ls)
+#cd $dir
+#composer install
+#npm install
+#mkdir public public/images/ storage/ storage/app storage/debugbar storage/framework storage/logs storage/framework/sessions storage/framework/views storage/framework/cache
+#mv /root/conf/index.php public/
 
-#setup .env
-
-#setup db connect src host
 
 #setup package
-npm run dev
-npm run prod 
-npm run  css
+#npm run dev
+#npm run prod 
+#npm run  css
 
 #setup permission
-chown -R nginx:nginx storage/
-chmod -R 755 storage/
-chown -R nginx:nginx public/
-chmod -R 755 public/
+#chown -R nginx:nginx storage/
+#chmod -R 755 storage/
+#chown -R nginx:nginx public/
+#chmod -R 755 public/
