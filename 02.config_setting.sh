@@ -15,3 +15,7 @@ cp /root/conf/nginx.conf /etc/nginx/nginx.conf
 systemctl start redis
 systemctl start php-fpm
 systemctl start nginx
+systemctl enable redis
+systemctl enable php-fpm
+systemctl enable nginx
+
