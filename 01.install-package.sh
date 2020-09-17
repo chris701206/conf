@@ -30,7 +30,7 @@ yum install -y redis
 
 #install php
 sudo amazon-linux-extras  install -y php7.2
-yum install -y php php-mysqlnd php-pdo php-xml php-pear php-devel php-mbstring php-fpm php-gd
+yum install -y php php-mysqlnd php-pdo php-xml php-pear php-devel php-mbstring php-fpm php-gd php-soap
 yum install -y php-zip php-bcmath php-dom php-gd php-mbstring php-posix php-redis
 
 #install nginx
